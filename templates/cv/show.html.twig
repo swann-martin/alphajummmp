@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cv
+{% endblock %}
+
+{% block body %}
+	<section class="box">
+		<div class="boxLeft">
+			<h1>{{ cv.title }}</h1>
+			<h3>Cv n°
+				{{ cv.id }}</h3>
+			<p>Dernière modification : le
+				{{ cv.updatedAt ? cv.updatedAt|date('d/m/Y') : '' }}</p>
+			<p>Consultable à
+				{{ cv.shortUrl }}</p>
+		</div>
+
+		<div class="boxRight">
+			<p>
+				Model de CV n°
+				{{ cv.model }}</p>
+
+			<p>Poste :
+				{{ cv.jobCv }}</p>
+
+		</div>
+
+		<div>
+			<h3>
+				A propos de moi :</h3>
+			<p>
+				{{ cv.about }}
+			</p>
+		</div>
+	</section>
+
+	<a href="{{ path('cv_index') }}">back to list</a>
+	<a href="{{ path('cv_edit', {'id': cv.id}) }}">edit</a>
+	{# {{ include('cv/_delete_form.html.twig') }} #}
+
+	{# part experiences  #}
+
+	<h2>Expérienzess</h2>
+	<div class="box">
+		<div class="boxLeft">
+			{% for xp in app.user.xps %}
+				<br>
+				<p>
+					<span>
+						<small>
+							<strong>
+								{{xp.jobDateFrom|date('dMy')}}
+								à
+								{{xp.jobDateTo|date('dMy')}}
+							</strong>
+						</small>
+					</span>
+					<i>{{xp.jobName}}</i>
+					pour
+					{{xp.companyName}}
+					à
+					{{xp.jobLocation}}
+				</p>
+				<br>
+				<hr>
+				<br>
+			{% endfor %}
+		</div>
+		<div class="boxRight">
+			<a class="btn" href="{{ path('xp_index') }}">
+				<i class="fas fa-edit"></i>
+			</a>
+		</div>
+	</div>
+
+	{# part hobbies #}
+
+	<h2>Hobbie</h2>
+	<div class="box">
+		<div class="boxLeft">
+			{% for hobby in app.user.hobbies %}
+				<br>
+				<p>
+					<i class="{{hobby.icon}}"></i>
+					{{hobby.hobbyName}}</p>
+				<br>
+				<hr>
+				<br>
+			{% endfor %}
+		</div>
+		<div class="boxRight">
+			<a class="btn" href="{{ path('hobbies_index') }}">
+				<i class="fas fa-edit"></i>
+			</a>
+		</div>
+	</div>
+	<a href="{{ path('cv_delete', {'id': cv.id}) }}">delete</a>
+	<a href="{{ path('user_export', {'id': app.user.id, 'cv': cv.id}) }} " class="btn">export</a>
+
+	<div class="box">
+		<a class="btn" href="{{ path('cv_majModel', {'id': cv.id, 'model': 1}) }} ">model 1</a>
+		<a class="btn" href="{{ path('cv_majModel', {'id': cv.id, 'model': 2}) }} ">model 2</a>
+		<a class="btn" href="{{ path('cv_majModel', {'id': cv.id, 'model': 3}) }} ">model 3</a>
+	</div>
+
+	<a class="btn btn-edit" href="{{ path('cv_index')}}">Retour à la page principale</a>
+{% endblock %}

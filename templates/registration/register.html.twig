@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1>Inscris-toi !</h1>
+    <p>Ces informations serviront à la création de la partie profil du CV.</p>
+
+    {{ form_start(registrationForm) }}
+<section class="registration-form">
+    <section class="registration-form-left">
+        <div class="mb-3">
+            {{ form_label(registrationForm.firstName, 'Prénom', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.firstName, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form_label(registrationForm.lastName, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.lastName, {'attr': {'class': 'form-control'}}) }}
+        </div>  
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.avatar, 'Avatar', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.avatar, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.website, 'Website', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.website, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+    </section>
+
+    <section class="registration-form-right">
+        <div class="mb-3">
+            {{ form_label(registrationForm.streetAdress, 'Adresse', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.streetAdress, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.postCode, 'Code Postal', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.postCode, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.city, 'Ville', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.city, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(registrationForm.phone, 'Téléphone', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_widget(registrationForm.agreeTerms) }}
+            {{ form_label(registrationForm.agreeTerms, 'En cochant cette cas j\'accepte les conditions d\'utilisation de jummmp', {'label_attr': {'class': ''}}) }}
+        </div>
+
+        <button type="submit" class="btn">Zééé partiiiiii!</button>
+    </section>
+
+</section>
+   
+    {{ form_end(registrationForm) }}
+{% endblock %}
